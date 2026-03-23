@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sonny Agent Japan — Personal Shopping & Forwarding from Tokyo</title>
+<meta name="description" content="Tokyo-based personal shopping agent. We buy from Mercari, Yahoo Auctions, Rakuten, SNKRDUNK and ship worldwide. Fast, reliable, 365 days available.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #cc0000;
+    --red-dark: #a00000;
+    --beige: #f5f0eb;
+    --beige-dark: #ede8e2;
+    --ink: #1a1a1a;
+    --muted: #6b6560;
+    --light: #ffffff;
+    --border: #ddd8d2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--beige);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* Sakura background pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 8px 12px at 12% 18%, #e8a0a820 0%, transparent 60%),
+      radial-gradient(ellipse 6px 10px at 28% 72%, #e8a0a818 0%, transparent 60%),
+      radial-gradient(ellipse 10px 14px at 55% 25%, #e8a0a815 0%, transparent 60%),
+      radial-gradient(ellipse 7px 11px at 74% 60%, #e8a0a820 0%, transparent 60%),
+      radial-gradient(ellipse 9px 13px at 88% 35%, #e8a0a818 0%, transparent 60%),
+      radial-gradient(ellipse 6px 9px at 42% 85%, #e8a0a815 0%, transparent 60%),
+      radial-gradient(ellipse 8px 12px at 8% 55%, #e8a0a818 0%, transparent 60%),
+      radial-gradient(ellipse 11px 15px at 95% 78%, #e8a0a820 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--beige);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+
+  .nav-logo span { color: var(--red); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--red); }
+
+  .nav-cta {
+    background: var(--red);
+    color: white !important;
+    padding: 10px 24px;
+    border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--red-dark) !important; color: white !important; }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 48px 80px;
+    border-left: 8px solid var(--red);
+  }
+
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 24px;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 6vw, 88px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 32px;
+  }
+
+  .hero-title strong {
+    font-weight: 600;
+    color: var(--red);
+    display: block;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 48px;
+    max-width: 480px;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--red);
+    color: white;
+    padding: 16px 36px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--red-dark); }
+
+  .btn-secondary {
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    padding: 16px 36px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { background: var(--ink); color: white; }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .service-card {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    border-radius: 4px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .service-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+
+  .service-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--beige);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .service-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .service-price {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--red);
+    margin-top: 8px;
+  }
+
+  /* BADGE */
+  .badge-strip {
+    position: relative;
+    z-index: 1;
+    background: var(--red);
+    color: white;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+  }
+
+  .badge-item {
+    text-align: center;
+  }
+
+  .badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 600;
+    display: block;
+  }
+
+  .badge-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 48px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 48px;
+  }
+
+  /* HOW IT WORKS */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    margin-top: 48px;
+  }
+
+  .step {
+    padding: 32px 24px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    position: relative;
+  }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 300;
+    color: var(--beige-dark);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .step h4 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .step p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* PRICING */
+  #pricing { background: white; }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .price-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 40px 32px;
+    position: relative;
+    transition: box-shadow 0.2s;
+  }
+
+  .price-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+
+  .price-card.featured {
+    border-color: var(--red);
+    border-width: 2px;
+  }
+
+  .featured-tag {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--red);
+    color: white;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 16px;
+    border-radius: 20px;
+  }
+
+  .price-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .price-amount {
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--red);
+    line-height: 1;
+    margin: 20px 0 4px;
+  }
+
+  .price-amount sup { font-size: 24px; }
+  .price-unit { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+
+  .price-features {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+
+  .price-features li {
+    font-size: 14px;
+    color: var(--muted);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--beige-dark);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .price-features li::before {
+    content: '—';
+    color: var(--red);
+    flex-shrink: 0;
+  }
+
+  /* SHIPPING TABLE */
+  #shipping { background: var(--beige-dark); }
+
+  .shipping-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    font-size: 13px;
+  }
+
+  .shipping-table th {
+    background: var(--ink);
+    color: white;
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .shipping-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--beige-dark);
+    color: var(--muted);
+  }
+
+  .shipping-table tr:last-child td { border-bottom: none; }
+  .shipping-table tr:hover td { background: var(--beige); }
+  .shipping-table td:first-child { font-weight: 500; color: var(--ink); }
+
+  .shipping-note {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; gap: 0; }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 24px 0;
+    font-size: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .faq-q:hover { color: var(--red); }
+
+  .faq-arrow {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+    transition: transform 0.3s;
+  }
+
+  .faq-item.open .faq-arrow { transform: rotate(45deg); color: var(--red); border-color: var(--red); }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .faq-a-inner { padding-bottom: 24px; }
+  .faq-item.open .faq-a { max-height: 200px; }
+
+  /* CONTACT */
+  #contact { background: white; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-info p {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  .contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+
+  .contact-detail strong { color: var(--ink); }
+
+  .whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #25d366;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 16px;
+    transition: background 0.2s;
+  }
+
+  .whatsapp-btn:hover { background: #1fba57; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+  .form-group label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--beige);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--red); }
+
+  .form-group textarea { min-height: 120px; resize: vertical; }
+
+  .form-submit {
+    background: var(--red);
+    color: white;
+    border: none;
+    padding: 16px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s;
+    align-self: flex-start;
+  }
+
+  .form-submit:hover { background: var(--red-dark); }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    background: var(--ink);
+    color: white;
+    padding: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 4px solid var(--red);
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+  }
+
+  .footer-logo span { color: var(--red); }
+
+  footer p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+  .hero-title { animation: fadeUp 0.6s 0.1s ease both; }
+  .hero-desc { animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-btns { animation: fadeUp 0.6s 0.3s ease both; }
+  .hero-right { animation: fadeUp 0.6s 0.2s ease both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; border-left: none; border-top: 6px solid var(--red); }
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .section-inner { padding: 60px 24px; }
+    .badge-strip { gap: 32px; flex-wrap: wrap; padding: 20px 24px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Sonny<span>Agent</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#shipping">Shipping</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Tokyo, Japan · Est. 2021</p>
+      <h1 class="hero-title">
+        Your personal<br>
+        <strong>Japan agent.</strong>
+      </h1>
+      <p class="hero-desc">
+        We buy from Mercari, Yahoo Auctions, Rakuten, SNKRDUNK and ship anywhere in the world. Lost something in Japan? Need a local errand done? We handle it all — 365 days a year.
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">Get a quote</a>
+        <a href="#services" class="btn-secondary">Our services</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="service-card">
+        <div class="service-icon">🛍</div>
+        <div>
+          <h3>Personal Shopping</h3>
+          <p>We purchase from any Japanese platform on your behalf and consolidate for shipping.</p>
+          <p class="service-price">USD 30</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📦</div>
+        <div>
+          <h3>Package Forwarding</h3>
+          <p>Ship directly to our Tokyo address. We repack and forward to your country.</p>
+          <p class="service-price">USD 35</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🗺</div>
+        <div>
+          <h3>Local Agent & Errands</h3>
+          <p>On-site tasks, lost item recovery, concert tickets, local pickups — anything in Japan.</p>
+          <p class="service-price">USD 100 / 3hrs</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BADGE STRIP -->
+<div class="badge-strip">
+  <div class="badge-item">
+    <span class="badge-num">365</span>
+    <span class="badge-label">Days Available</span>
+  </div>
+  <div class="badge-item">
+    <span class="badge-num">12h</span>
+    <span class="badge-label">Response Guarantee</span>
+  </div>
+  <div class="badge-item">
+    <span class="badge-num">4</span>
+    <span class="badge-label">Carriers (Post · FedEx · DHL · UPS)</span>
+  </div>
+  <div class="badge-item">
+    <span class="badge-num">🌏</span>
+    <span class="badge-label">Ships Worldwide</span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="services">
+  <div class="section-inner">
+    <p class="section-label">How it works</p>
+    <h2 class="section-title">Simple, transparent<br>process.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h4>Send us the item</h4>
+        <p>Share the product URL or describe what you need. We'll confirm availability and provide a quote.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h4>We purchase & receive</h4>
+        <p>We buy the item, receive it at our Tokyo address, and inspect the condition for you.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h4>Payment via Wise</h4>
+        <p>You pay the item cost + service fee via Wise or Revolut. No hidden charges.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h4>Shipped to you</h4>
+        <p>We pack and ship with your preferred carrier. Tracking provided immediately.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px; padding: 32px; background: white; border: 1px solid var(--border); border-radius: 4px;">
+      <p class="section-label" style="margin-bottom: 12px;">Platforms we cover</p>
+      <p style="font-size: 15px; color: var(--muted); line-height: 2;">
+        Yahoo Auctions Japan &nbsp;·&nbsp; Mercari &nbsp;·&nbsp; Rakuten &nbsp;·&nbsp; Amazon Japan &nbsp;·&nbsp; SNKRDUNK &nbsp;·&nbsp; Zozotown &nbsp;·&nbsp; Komehyo &nbsp;·&nbsp; Any Japanese website
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <p class="section-label">Pricing</p>
+    <h2 class="section-title">Clear fees,<br>no surprises.</h2>
+    <div class="pricing-grid">
+      <div class="price-card featured">
+        <div class="featured-tag">Most popular</div>
+        <h3>Personal Shopping</h3>
+        <p style="font-size:14px; color:var(--muted);">Buy from any Japanese platform</p>
+        <div class="price-amount"><sup>$</sup>30</div>
+        <p class="price-unit">per order</p>
+        <ul class="price-features">
+          <li>Yahoo Auctions, Mercari, Rakuten & more</li>
+          <li>Item inspection on arrival</li>
+          <li>Consolidation available (+$5/pkg)</li>
+          <li>Pre-orders & lottery applications</li>
+          <li>3.9% payment processing fee</li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="display:block; text-align:center;">Get started</a>
+      </div>
+      <div class="price-card">
+        <h3>Package Forwarding</h3>
+        <p style="font-size:14px; color:var(--muted);">Ship to our address, we forward</p>
+        <div class="price-amount"><sup>$</sup>35</div>
+        <p class="price-unit">per shipment</p>
+        <ul class="price-features">
+          <li>Use our Tokyo address</li>
+          <li>Efficient repacking</li>
+          <li>Multi-package consolidation</li>
+          <li>4 carrier options</li>
+          <li>3.9% payment processing fee</li>
+        </ul>
+        <a href="#contact" class="btn-secondary" style="display:block; text-align:center;">Get started</a>
+      </div>
+      <div class="price-card">
+        <h3>Local Agent</h3>
+        <p style="font-size:14px; color:var(--muted);">On-site tasks anywhere in Japan</p>
+        <div class="price-amount"><sup>$</sup>100</div>
+        <p class="price-unit">per 3 hours</p>
+        <ul class="price-features">
+          <li>Lost item recovery</li>
+          <li>Concert & event tickets</li>
+          <li>In-store purchases</li>
+          <li>Local pickups & errands</li>
+          <li>Travel expenses billed separately</li>
+        </ul>
+        <a href="#contact" class="btn-secondary" style="display:block; text-align:center;">Get started</a>
+      </div>
+    </div>
+    <p style="margin-top: 24px; font-size: 13px; color: var(--muted);">
+      * Payment accepted via Wise, Revolut, or local bank transfer (JPY). A 3.9% payment processing fee applies. Shipping costs and item prices are billed separately.
+    </p>
+  </div>
+</section>
+
+<!-- SHIPPING -->
+<section id="shipping">
+  <div class="section-inner">
+    <p class="section-label">Shipping rates</p>
+    <h2 class="section-title">Japan Post EMS<br>rates (JPY)</h2>
+    <div style="overflow-x: auto;">
+      <table class="shipping-table">
+        <thead>
+          <tr>
+            <th>Weight</th>
+            <th>CN / KR / TW</th>
+            <th>Asia</th>
+            <th>Oceania / CA / EU</th>
+            <th>USA</th>
+            <th>S. America / Africa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Up to 500g</td><td>¥1,450</td><td>¥1,900</td><td>¥3,150</td><td>¥3,900</td><td>¥3,600</td></tr>
+          <tr><td>Up to 1kg</td><td>¥2,200</td><td>¥3,150</td><td>¥4,400</td><td>¥5,300</td><td>¥5,100</td></tr>
+          <tr><td>Up to 2kg</td><td>¥3,400</td><td>¥4,550</td><td>¥6,700</td><td>¥7,900</td><td>¥8,100</td></tr>
+          <tr><td>Up to 3kg</td><td>¥4,400</td><td>¥5,750</td><td>¥8,800</td><td>¥10,300</td><td>¥11,100</td></tr>
+          <tr><td>Up to 4kg</td><td>¥5,400</td><td>¥6,950</td><td>¥10,900</td><td>¥12,700</td><td>¥14,100</td></tr>
+          <tr><td>Up to 5kg</td><td>¥6,400</td><td>¥8,150</td><td>¥13,000</td><td>¥15,100</td><td>¥17,100</td></tr>
+          <tr><td>Up to 6kg</td><td>¥7,400</td><td>¥9,350</td><td>¥15,100</td><td>¥17,500</td><td>¥20,100</td></tr>
+          <tr><td>Up to 7kg</td><td>¥8,200</td><td>¥10,350</td><td>¥17,200</td><td>¥19,900</td><td>¥22,500</td></tr>
+          <tr><td>Up to 8kg</td><td>¥9,000</td><td>¥11,350</td><td>¥17,200</td><td>¥22,300</td><td>¥22,500</td></tr>
+          <tr><td>Up to 9kg</td><td>¥9,800</td><td>¥12,350</td><td>¥21,400</td><td>¥24,700</td><td>¥27,300</td></tr>
+          <tr><td>Up to 10kg</td><td>¥10,600</td><td>¥13,350</td><td>¥23,500</td><td>¥27,100</td><td>¥29,700</td></tr>
+          <tr><td>Up to 15kg</td><td>¥14,600</td><td>¥18,350</td><td>¥34,000</td><td>¥39,100</td><td>¥41,700</td></tr>
+          <tr><td>Up to 20kg</td><td>¥18,600</td><td>¥23,350</td><td>¥44,500</td><td>¥51,100</td><td>¥53,700</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="shipping-note">
+      Carrier selected based on destination, size, and weight: Japan Post EMS · FedEx · DHL · UPS.<br>
+      Duties and taxes are the responsibility of the recipient and will be charged by the carrier on delivery.
+    </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <p class="section-label">FAQ</p>
+    <h2 class="section-title">Frequently asked<br>questions.</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Can you ship alcohol or sake from Japan? <span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">It depends on your country's regulations. For example, Canada does not allow alcohol imports. Please contact us before ordering and we'll check the rules for your destination.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can you forward a Zippo lighter? <span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. We disassemble the lighter before shipping to comply with air freight regulations.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do I need to pay duties and taxes? <span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. Duties and taxes are the responsibility of the importer. The carrier will contact you for payment when the package arrives in your country.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can you combine multiple packages into one box? <span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. We consolidate packages to reduce your shipping costs. There is an additional fee of USD 5 per extra package combined.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can you make pre-orders for Japanese items? <span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. We handle pre-orders for new releases, limited editions, and upcoming products from Japanese retailers.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can you enter lottery applications in Japan? <span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. We can apply for limited-release lotteries (Nike SNKRS, concert tickets, brand raffles, etc.) on your behalf.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How do I pay? <span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">We accept Wise, Revolut, and local bank transfer (JPY). A 3.9% payment processing fee applies. Item cost and shipping are billed separately from the service fee.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">I forgot something at a hotel in Japan — can you help? <span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes! Lost item recovery is one of our most common local agent tasks. Contact us with the details (hotel name, dates, item description) and we'll coordinate retrieval and shipping.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="section-label">Contact</p>
+        <h2 class="section-title" style="margin-bottom: 24px;">Let's get<br>started.</h2>
+        <p>Fill in the form or reach us directly on WhatsApp for the fastest response. We reply within 12 hours, 365 days a year.</p>
+        <div class="contact-detail">
+          <strong>Location:</strong> Tokyo, Japan
+        </div>
+        <div class="contact-detail">
+          <strong>Payment:</strong> Wise · Revolut · Bank Transfer
+        </div>
+        <div class="contact-detail">
+          <strong>Response:</strong> Within 12 hours
+        </div>
+        <a href="https://wa.me/819098727710?text=Hi%2C%20I%20found%20your%20service%20online%20and%20would%20like%20a%20quote." class="whatsapp-btn" target="_blank">
+          💬 Chat on WhatsApp
+        </a>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your name</label>
+            <input type="text" placeholder="John Smith" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="john@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Service needed</label>
+          <select>
+            <option value="">Select a service…</option>
+            <option>Personal Shopping</option>
+            <option>Package Forwarding</option>
+            <option>Local Agent / Errand</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell us about your request</label>
+          <textarea placeholder="Item URL, description, destination country, any special instructions…"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send enquiry</button>
+        <div id="form-msg" style="display:none; font-size:14px; color: var(--red); margin-top: 8px;"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Sonny<span>Agent</span> Japan</div>
+  <p>© 2026 SonnyAgent Japan · Tokyo · sonnyagent.com</p>
+</footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const msg = document.getElementById('form-msg');
+    msg.style.display = 'block';
+    msg.textContent = 'Thank you! We will get back to you within 12 hours.';
+    msg.style.color = '#2a9d5c';
+    e.target.reset();
+  }
+</script>
+</body>
+</html>
