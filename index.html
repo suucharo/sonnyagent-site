@@ -628,6 +628,57 @@
   .hero-btns { animation: fadeUp 0.6s 0.3s ease both; }
   .hero-right { animation: fadeUp 0.6s 0.2s ease both; }
 
+
+  /* REVIEWS */
+  #reviews { background: var(--beige-dark); }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .review-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .review-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+
+  .review-stars { color: var(--red); font-size: 18px; letter-spacing: 2px; }
+
+  .review-text {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+    flex: 1;
+    font-style: italic;
+  }
+
+  .review-author {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+
+  .review-name { font-weight: 500; font-size: 14px; color: var(--ink); }
+  .review-country { font-size: 13px; color: var(--muted); }
+
+  @media (max-width: 900px) {
+    .reviews-grid { grid-template-columns: 1fr; }
+  }
+
   @media (max-width: 900px) {
     nav { padding: 0 24px; }
     .nav-links { display: none; }
@@ -669,6 +720,7 @@
     <li><a href="#services">Services</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#shipping">Shipping</a></li>
+    <li><a href="#reviews">Reviews</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#contact" class="nav-cta">Contact</a></li>
   </ul>
@@ -865,6 +917,44 @@
       Carrier selected based on destination, size, and weight: Japan Post EMS · FedEx · DHL · UPS.<br>
       Duties and taxes are the responsibility of the recipient and will be charged by the carrier on delivery.
     </p>
+  </div>
+</section>
+
+
+<section id="reviews">
+  <div class="section-inner">
+    <p class="section-label">Reviews</p>
+    <h2 class="section-title">What our customers<br>say.</h2>
+    <div class="reviews-grid">
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Fast and reliable service. Got my item from Yahoo Auctions delivered to Canada in perfect condition. Will definitely use again!"</p>
+        <div class="review-author">
+          <span class="review-name">Sarah M.</span>
+          <span class="review-country">🇨🇦 Canada</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Helped me recover an item I left at a hotel in Tokyo. Quick response and handled everything professionally."</p>
+        <div class="review-author">
+          <span class="review-name">James T.</span>
+          <span class="review-country">🇬🇧 UK</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Great communication throughout the whole process. Found a rare figure on Mercari and shipped it to me in Australia with no issues."</p>
+        <div class="review-author">
+          <span class="review-name">Luke R.</span>
+          <span class="review-country">🇦🇺 Australia</span>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
