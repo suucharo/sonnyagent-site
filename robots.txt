@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sonnyagent.com/sitemap.xml
