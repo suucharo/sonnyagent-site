@@ -1282,6 +1282,8 @@
     document.getElementById('calc-fees').textContent = fmt(totalFees);
   }
   calcPayout();
+
+  function copyUrl() {
     navigator.clipboard.writeText('https://sonnyagent.com').then(() => {
       const btn = document.querySelector('.share-btn-copy');
       btn.textContent = '✓ Copied!';
